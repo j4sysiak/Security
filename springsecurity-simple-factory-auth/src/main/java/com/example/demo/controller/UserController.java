@@ -7,7 +7,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.extras.springsecurity5.util.SpringSecurityContextUtils;
 
 import java.security.Principal;
 import java.util.Collection;
@@ -35,6 +34,9 @@ public class UserController {
 
         final Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         model.addAttribute("authorities", authorities);
+
+        Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
+        model.addAttribute("details", details);
         return "hello";
     }
 
