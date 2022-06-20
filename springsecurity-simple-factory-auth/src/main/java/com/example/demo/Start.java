@@ -32,17 +32,9 @@ public class Start {
                 .password(passwordEncoder.encode("uuu"))
                 .role("ROLE_USER")
                 .build();
-//
-//
-//                new AppUser();
-//        appUser.setUsername("xxx");
-//        appUser.setRole("ROLE_ADMIN");
-//        appUser.setPassword(passwordEncoder.encode("xxx"));
 
         //zapis usera do bazy
         appUserRepo.save(appUserAdmin);
         appUserRepo.save(appUserUser);
     }
-
-
 }
