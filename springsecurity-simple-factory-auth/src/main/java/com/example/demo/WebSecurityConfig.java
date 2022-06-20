@@ -41,9 +41,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().disable();
 
         http.authorizeRequests()
-                .antMatchers("/hello")
-                //.hasRole("ADMIN")   lub
-                .hasAuthority("ROLE_ADMIN")
+                .antMatchers("/hello").authenticated()
+                .antMatchers("/for-admin").hasAuthority("ROLE_ADMIN")  //lub  .hasRole("ADMIN")
+                .antMatchers("/for-user").hasAuthority("ROLE_USER")    //lub  .hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/hello");  // po zalogowaniu przechodzi automatycznie na endpoin /hello

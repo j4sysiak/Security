@@ -1,13 +1,15 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller  // mapuje bezpośrednio do plików, czyli hello.html,  hello-admin.html,  hello-user.html
+// @RestController    mapuje bezpośrednio do typu zwracanego np:  String  - mapuje np do Stringa hello
 public class UserController {
 
     @RequestMapping("/hello")
-    public String get() {
+    @ResponseBody  // to umożliwia zwrócenie String "hello", pomimo tego , że mamy adnotację @Controller  na klasie, co by sugerowało raczej mapping na hello.html
+    public String hello() {
         return "hello";
     }
 
