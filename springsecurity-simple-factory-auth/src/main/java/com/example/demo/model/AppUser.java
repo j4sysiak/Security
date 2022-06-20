@@ -42,15 +42,15 @@ public class AppUser implements UserDetails {
         return Collections.singleton(new SimpleGrantedAuthority(role));  // lista jednoelementowa
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
+//    @Override
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    @Override
+//    public String getUsername() {
+//        return username;
+//    }
 
     @Override
     public boolean isAccountNonExpired() {

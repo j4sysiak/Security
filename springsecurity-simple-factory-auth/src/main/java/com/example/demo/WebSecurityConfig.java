@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //podkładamy naszego pobranego usera
+        // podkładamy naszego pobranego usera
         // i mamy możliwość tworzenia nowych użytkowników
         // którzy będą zapisywani do bazy danych
         auth.userDetailsService(userDetailService);
