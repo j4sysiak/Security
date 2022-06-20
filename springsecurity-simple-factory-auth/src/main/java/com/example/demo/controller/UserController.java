@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.AppUser;
+import com.example.demo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,13 @@ import org.springframework.web.bind.annotation.*;
 @Controller  // mapuje bezpośrednio do plików, czyli hello.html,  hello-admin.html,  hello-user.html
 // @RestController    mapuje bezpośrednio do typu zwracanego np:  String  - mapuje np do Stringa hello
 public class UserController {
+
+    //dzięi temu wstrzyknięciu mamy odseparowaną logikę do tworzenia usera
+    private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping("/hello")
     @ResponseBody  // ta anotacja umożliwia zwrócenie String "hello", pomimo tego , że mamy adnotację @Controller  na klasie, co by sugerowało raczej mapping na hello.html
@@ -34,6 +42,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(AppUser appUser) {
+        userService.addUser(appUser);
         System.out.println(appUser);
         return "sign-up";
     }
