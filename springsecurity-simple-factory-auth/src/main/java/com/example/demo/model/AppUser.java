@@ -10,9 +10,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Entity
+@Builder
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AppUser implements UserDetails {
@@ -21,9 +21,21 @@ public class AppUser implements UserDetails {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String userName;
+    private String username;
     private String password;
     private String role;
+
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -37,7 +49,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override

@@ -15,10 +15,16 @@ public class Start {
         this.appUserRepo = appUserRepo;
 
         AppUser appUser = AppUser.builder()
-                .userName("xxx")
+                .username("xxx")
                 .password(passwordEncoder.encode("xxx"))
                 .role("ROLE_ADMIN")
                 .build();
+//
+//
+//                new AppUser();
+//        appUser.setUsername("xxx");
+//        appUser.setRole("ROLE_ADMIN");
+//        appUser.setPassword(passwordEncoder.encode("xxx"));
 
         //zapis usera do bazy
         appUserRepo.save(appUser);
