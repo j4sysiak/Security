@@ -8,13 +8,9 @@
 
     Hello <span th:text="${name}" />
     <table>
-        <th:block th:each="user : ${users}">
+        <th:block th:each="auth : ${authorities}">
             <tr>
-                <td th:text="${user.login}">...</td>
-                <td th:text="${user.name}">...</td>
-            </tr>
-            <tr>
-                <td colspan="2" th:text="${user.address}">...</td>
+                <td th:text="${auth}">...</td>
             </tr>
         </th:block>
     </table>
