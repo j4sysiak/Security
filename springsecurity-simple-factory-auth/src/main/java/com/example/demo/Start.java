@@ -21,10 +21,16 @@ public class Start {
     public Start(AppUserRepo appUserRepo, PasswordEncoder passwordEncoder) {
         this.appUserRepo = appUserRepo;
 
-        AppUser appUser = AppUser.builder()
-                .username("xxx")
-                .password(passwordEncoder.encode("xxx"))
+        AppUser appUserAdmin = AppUser.builder()
+                .username("aaa")
+                .password(passwordEncoder.encode("aaa"))
                 .role("ROLE_ADMIN")
+                .build();
+
+        AppUser appUserUser = AppUser.builder()
+                .username("uuu")
+                .password(passwordEncoder.encode("uuu"))
+                .role("ROLE_USER")
                 .build();
 //
 //
@@ -34,7 +40,8 @@ public class Start {
 //        appUser.setPassword(passwordEncoder.encode("xxx"));
 
         //zapis usera do bazy
-        appUserRepo.save(appUser);
+        appUserRepo.save(appUserAdmin);
+        appUserRepo.save(appUserUser);
     }
 
 
