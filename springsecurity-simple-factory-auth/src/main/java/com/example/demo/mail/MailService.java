@@ -11,6 +11,7 @@ import javax.mail.internet.MimeMessage;
 @Service
 public class MailService {
 
+    // wstrzyknięcie zależności przez konstruktor
     private JavaMailSender javaMailSender;
 
     @Autowired
