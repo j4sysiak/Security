@@ -19,7 +19,6 @@ public class Token {
     private String value;
 
     @OneToOne
-    @JoinColumn(name = "app_user_id")
     private AppUser appUser;
 
 }
