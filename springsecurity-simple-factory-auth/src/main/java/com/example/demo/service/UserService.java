@@ -20,6 +20,7 @@ public class UserService {
     public void addUser(AppUser appUser) {
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         appUser.setRole("ROLE_USER");
+        appUser.setEnabled(false);
         appUserRepo.save(appUser);
     }
 }

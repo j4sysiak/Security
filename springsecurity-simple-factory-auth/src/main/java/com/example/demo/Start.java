@@ -25,12 +25,14 @@ public class Start {
                 .username("aaa")
                 .password(passwordEncoder.encode("aaa"))
                 .role("ROLE_ADMIN")
+                .isEnabled(true)
                 .build();
 
         AppUser appUserUser = AppUser.builder()
                 .username("uuu")
                 .password(passwordEncoder.encode("uuu"))
                 .role("ROLE_USER")
+                .isEnabled(true)
                 .build();
 
         //zapis usera do bazy
