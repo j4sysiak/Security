@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.AppUser;
+import com.example.demo.repository.AppUserRepo;
+import com.example.demo.repository.TokenRepo;
 import com.example.demo.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,11 +17,15 @@ import java.util.Collection;
 // @RestController    mapuje bezpośrednio do typu zwracanego np:  String  - mapuje np do Stringa hello
 public class UserController {
 
-    //dzięi temu wstrzyknięciu mamy odseparowaną logikę do tworzenia usera
+    //wstrzykujemy token repo, bo z tego będziemy wyciągać informację, czt rzeczywiście z takiego token repo
+    private TokenRepo tokenRepo;
+
+    //dzięki temu wstrzyknięciu mamy odseparowaną logikę do tworzenia usera
     private UserService userService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, TokenRepo tokenRepo) {
         this.userService = userService;
+        this.tokenRepo = tokenRepo;
     }
 
 //    @RequestMapping("/hello")
@@ -64,6 +70,11 @@ public class UserController {
         userService.addUser(appUser);
         System.out.println(appUser);
         return "sign-up";
+    }
+
+    @GetMapping("/token")
+    public String register(@RequestParam String value) {
+
     }
 
 }
