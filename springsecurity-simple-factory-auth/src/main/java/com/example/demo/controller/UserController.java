@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.AppUser;
+import com.example.demo.model.Token;
 import com.example.demo.repository.AppUserRepo;
 import com.example.demo.repository.TokenRepo;
 import com.example.demo.service.UserService;
@@ -17,15 +18,19 @@ import java.util.Collection;
 // @RestController    mapuje bezpośrednio do typu zwracanego np:  String  - mapuje np do Stringa hello
 public class UserController {
 
-    //wstrzykujemy token repo, bo z tego będziemy wyciągać informację, czt rzeczywiście z takiego token repo
+    //wstrzykujemy token repo, bo z tego będziemy wyciągać informację, czy rzeczywiście z takiego token repo
     private TokenRepo tokenRepo;
+
+    // wstrzykujemy to, bo musimy zapisać usera w bazie
+    private AppUserRepo appUserRepo;
 
     //dzięki temu wstrzyknięciu mamy odseparowaną logikę do tworzenia usera
     private UserService userService;
 
-    public UserController(UserService userService, TokenRepo tokenRepo) {
+    public UserController(UserService userService, TokenRepo tokenRepo, AppUserRepo appUserRepo) {
         this.userService = userService;
         this.tokenRepo = tokenRepo;
+        this.appUserRepo = appUserRepo;
     }
 
 //    @RequestMapping("/hello")
@@ -72,9 +77,16 @@ public class UserController {
         return "sign-up";
     }
 
+    //po kliknięciu linka z maila, użytkownik zostaje tutaj przekierowany (do tego endpointa)
     @GetMapping("/token")
     public String register(@RequestParam String value) {
+        Token tokenByValue = tokenRepo.findByValue(value); // sprawdzenie, czy ten token znajdujer się w bazie danych
+        AppUser appUser = tokenByValue.getAppUser();  // pobiera usera, przypisanego do tego tokena (jeżeli znalazł w bazie ten token)
+        appUser.setEnabled(true); // ustawia enabled=true (aktywuje usera)
 
+        appUserRepo.save(appUser);  //zapis uesera dao bazy
+
+        return "/hello";  // przenosi go do endpointa
     }
 
 }

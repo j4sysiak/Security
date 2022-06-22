@@ -39,10 +39,10 @@ public class UserService {
         appUser.setRole("ROLE_USER");
         appUser.setEnabled(false);
         appUserRepo.save(appUser);
-        saveToken(appUser);
+        sendToken(appUser); // wysyła token do usera (na maila)
     }
 
-    private void saveToken(AppUser appUser) {
+    private void sendToken(AppUser appUser) {
         //generowanie tokena
         String tokenValue = UUID.randomUUID().toString();
         //zapis tokena w bazie danych
