@@ -19,6 +19,7 @@ public class QuotationApi {
     }
 
     @GetMapping("/api")
+//    @RequestMapping(method = RequestMethod.GET, name = "/api")
     public List<Quotation> getQuotations() {
       return quotations;
     }
