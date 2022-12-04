@@ -2,6 +2,7 @@ package com.example.springsecuritysamplelivestream;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -14,10 +15,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("user")
-                .roles("USER")
+        UserDetails moderator = User.withDefaultPasswordEncoder()
+                .username("moderator")
+                .password("moderator")
+                .roles("MODERATOR")
                 .build();
 
 
@@ -27,19 +28,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("ADMIN")
                 .build();
 
-        return new InMemoryUserDetailsManager(user, admin);
+        return new InMemoryUserDetailsManager(moderator, admin);
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.headers().disable();
-        http.authorizeRequests()
-                .antMatchers("/hello").permitAll()
-                .anyRequest().hasRole("ADMIN")
+
+//        http.headers().disable();
+        http.httpBasic()
+                .and()
+                .authorizeRequests()
+                //.antMatchers("/hello").permitAll()
+                .antMatchers(HttpMethod.GET, "/api").permitAll()
+                .antMatchers(HttpMethod.POST, "/api").hasAnyRole("MODERATOR", "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api").hasRole("ADMIN")
+                //.anyRequest().hasRole("ADMIN")
                 .and()
                 .formLogin().permitAll()
                 .and()
-                .logout().permitAll();
+                .logout().permitAll()
+                .and()
+                .csrf().disable();
     }
 
 
