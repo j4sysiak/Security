@@ -1,20 +1,9 @@
 package com.example.springsecuritytest.service;
 
-import com.example.springsecuritytest.entity.CustomUser;
-import com.example.springsecuritytest.repository.UserRoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PostFilter;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.security.RolesAllowed;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserRoleService {
